@@ -8,6 +8,7 @@ const GROUPS: Record<string, string> = {
   shape: "Pill buttons and tags, and cards, images and sections rounded at 16px and more.",
   color: "Gradient washes and gradient text, glows, frosted glass, accent stripes, grain.",
   structure: "Eyebrow labels, 01 / 02 section numbers, code-style labels, periods after headlines, the same card row in every section.",
+  // deslop-keep: names the stock words as examples
   copy: "Stock words like seamless and elevate, hype openers, staccato slogans, Title Case, emoji, exclamation marks.",
   honesty: "Numbers and proof that need a source, fake urgency, links to nowhere, placeholder text left in.",
 };
