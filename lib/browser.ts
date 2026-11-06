@@ -11,14 +11,19 @@ const LOCAL_CHROME = [
 
 let shared: Promise<Browser> | null = null;
 
+/** Serverless Chromium is a single-process headless shell: it cannot hold separate browser contexts. */
+export const serverless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+
 async function launch(): Promise<Browser> {
-  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  if (serverless) {
     const chromium = (await import("@sparticuz/chromium")).default;
+    chromium.setGraphicsMode = false; // no WebGL needed; skips unpacking SwiftShader on cold starts
     return puppeteer.launch({
-      args: [...chromium.args, "--hide-scrollbars"],
+      args: await puppeteer.defaultArgs({ args: [...chromium.args, "--hide-scrollbars"], headless: "shell" }),
       executablePath: await chromium.executablePath(),
-      headless: true,
+      headless: "shell",
       defaultViewport: null,
+      protocolTimeout: 45000,
     });
   }
   const fs = await import("node:fs");

@@ -1,5 +1,5 @@
 import type { Page } from "puppeteer-core";
-import { getBrowser } from "./browser";
+import { getBrowser, serverless } from "./browser";
 import { inpageAudit } from "./inpage";
 import { AuditError, USER_AGENT, assertPublicUrl } from "./net";
 import { signResult } from "./sign";
@@ -62,8 +62,8 @@ async function crop(page: Page, f: Finding, docH: number): Promise<Crop | null> 
 export async function auditPage(url: string): Promise<PagePayload> {
   await assertPublicUrl(url);
   const browser = await getBrowser();
-  const context = await browser.createBrowserContext();
-  const page = await context.newPage();
+  const context = serverless ? null : await browser.createBrowserContext();
+  const page = context ? await context.newPage() : await browser.newPage();
   try {
     await page.setUserAgent(USER_AGENT);
     await page.setViewport({ width: WIDTH, height: HEIGHT, deviceScaleFactor: 1 });
@@ -136,6 +136,7 @@ export async function auditPage(url: string): Promise<PagePayload> {
       thumb: thumbBuf ? "data:image/jpeg;base64," + Buffer.from(thumbBuf).toString("base64") : null,
     };
   } finally {
-    await context.close().catch(() => {});
+    if (context) await context.close().catch(() => {});
+    else await page.close().catch(() => {});
   }
 }
