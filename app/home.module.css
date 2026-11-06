@@ -20,7 +20,8 @@
 .groupItem {
   display: grid;
   gap: 2px 56px;
-  padding: 16px 0;
+  padding: 18px 0;
+  align-items: center;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -28,7 +29,8 @@
   .groupItem { grid-template-columns: 0.8fr 1.2fr; }
 }
 
-.groupItem dt { font-weight: 600; }
+.groupItem dt { display: flex; align-items: center; gap: 18px; font-weight: 600; }
+.groupItem dt svg { flex: none; }
 .groupItem dd { margin: 0; max-width: 60ch; color: var(--ink-2); }
 
 .origin {

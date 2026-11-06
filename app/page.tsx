@@ -1,4 +1,6 @@
 import Auditor from "@/components/Auditor";
+import Glyph from "@/components/Glyph";
+import Proof from "@/components/Proof";
 import { canSave } from "@/lib/store";
 import { CATEGORIES, TELLS } from "@/lib/tells";
 import s from "./home.module.css";
@@ -18,6 +20,8 @@ export const dynamic = "force-dynamic";
 export default function Home() {
   return (
     <Auditor canShare={canSave()}>
+      <Proof />
+
       <section className={`wrap ${s.how}`} aria-labelledby="how-title">
         <h2 id="how-title" className={s.howTitle}>
           It reads the page a visitor sees
@@ -39,7 +43,10 @@ export default function Home() {
         <dl className={s.groupList}>
           {CATEGORIES.map((c) => (
             <div key={c.id} className={s.groupItem}>
-              <dt>{c.name}</dt>
+              <dt>
+                <Glyph group={c.id} />
+                {c.name}
+              </dt>
               <dd>{GROUPS[c.id]}</dd>
             </div>
           ))}

@@ -9,6 +9,9 @@
 }
 
 .mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 24px;
   font-weight: 600;
   text-decoration: none;
@@ -28,3 +31,5 @@
 
 .footerRow { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 32px; }
 .footerRow p { margin: 0; }
+
+.mark img { flex: none; width: 30px; height: 30px; border-radius: 3px; }

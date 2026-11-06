@@ -19,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className={`wrap ${s.top}`}>
           <Link className={s.mark} href="/">
-            Deslop
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/mark.png" alt="" width={30} height={30} />
+            deslop
           </Link>
           <nav aria-label="Main" className={s.nav}>
             <Link href="/method">How scoring works</Link>
