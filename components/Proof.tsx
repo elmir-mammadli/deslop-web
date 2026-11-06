@@ -24,7 +24,7 @@ export default function Proof() {
         <div className={s.row}>
           <div>
             <p className={s.tag}>Before</p>
-            <div className={s.slop} aria-hidden="true">
+            <div className={s.slop} aria-hidden="true" data-deslop-keep="">
               <p className={s.slopStatus}>
                 <span className={s.strike}>● Accepting clients</span>
               </p>

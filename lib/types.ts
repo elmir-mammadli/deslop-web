@@ -26,7 +26,7 @@ export type InpageResult = {
   findings: Finding[];
   counts: Record<string, number>;
   fonts: { family: string; share: number }[];
-  stats: { textElements: number; visibleElements: number; headings: number; words: number };
+  stats: { textElements: number; visibleElements: number; headings: number; words: number; kept?: number };
 };
 
 export type PageResult = {

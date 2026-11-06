@@ -42,7 +42,9 @@ export function inpageAudit(): InpageResult {
     }
     return s;
   }
+  // data-deslop-keep marks examples a page shows on purpose, such as a specimen or a quoted stock phrase
   function isVisible(el: Element) {
+    if (el.closest("[data-deslop-keep]")) return false;
     const s = cs(el);
     if (s.display === "none" || s.visibility === "hidden" || s.visibility === "collapse" || parseFloat(s.opacity) === 0) return false;
     const r = el.getBoundingClientRect();
@@ -361,6 +363,6 @@ export function inpageAudit(): InpageResult {
     findings,
     counts,
     fonts: fonts.slice(0, 5).map((f) => ({ family: f.family, share: Math.round(f.share * 1000) / 1000 })),
-    stats: { textElements, visibleElements, headings: headings.length, words },
+    stats: { textElements, visibleElements, headings: headings.length, words, kept: document.querySelectorAll("[data-deslop-keep]").length },
   };
 }

@@ -47,7 +47,7 @@ export default function Home() {
                 <Glyph group={c.id} />
                 {c.name}
               </dt>
-              <dd>{GROUPS[c.id]}</dd>
+              <dd data-deslop-keep={c.id === "copy" || c.id === "honesty" ? "" : undefined}>{GROUPS[c.id]}</dd>
             </div>
           ))}
         </dl>

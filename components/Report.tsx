@@ -107,6 +107,7 @@ function TellBlock({ t, pages, crops, total }: { t: TellScore; pages: PageResult
 
 export default function Report({ view, payloads, savedId, note, onRestart }: Props) {
   const score = useMemo(() => scoreSite(view.pages), [view.pages]);
+  const kept = view.pages.reduce((n, p) => n + (p.stats.kept || 0), 0);
   const [copied, setCopied] = useState(false);
   const [share, setShare] = useState<{ state: "idle" | "saving" | "done" | "error"; url?: string; error?: string }>(
     savedId ? { state: "done", url: `/r/${savedId}` } : { state: "idle" },
@@ -319,6 +320,8 @@ export default function Report({ view, payloads, savedId, note, onRestart }: Pro
         The score weighs each tell by how strongly it reads as generated and how much of the site it covers.{" "}
         <Link href="/method">How scoring works</Link>. A rendered audit sees what a visitor sees, so it can miss tells inside
         images and canvas, and it can flag a choice that is right for this brand. The keep rules are there for that.
+        {kept > 0 &&
+          ` The site marked ${kept} element${kept === 1 ? "" : "s"} with data-deslop-keep as examples on purpose, and those were skipped.`}
       </p>
     </main>
   );

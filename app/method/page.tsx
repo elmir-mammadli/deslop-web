@@ -59,6 +59,11 @@ export default function Method() {
           desktop width only. It cannot know intent: a condensed capital headline may be the brand, and a texture may be the
           art direction. That is what the keep rule under every finding is for.
         </p>
+        <p>
+          A page that shows tells on purpose, such as a style guide or this site&apos;s own before and after, can mark those
+          blocks with a <code>data-deslop-keep</code> attribute. The audit skips them, and the report says how many it
+          skipped. Pages that robots.txt disallows are not crawled.
+        </p>
       </section>
 
       <section className={s.section} aria-labelledby="tells-title">
@@ -80,7 +85,7 @@ export default function Method() {
                   <tr key={t.id}>
                     <td>
                       {t.name}
-                      <span className={s.why}>{t.why}</span>
+                      <span className={s.why} data-deslop-keep="">{t.why}</span>
                     </td>
                     <td>{t.level === "fix" ? "Fix" : "Review"}</td>
                     <td>{t.weight}</td>
