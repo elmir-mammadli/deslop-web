@@ -33,5 +33,7 @@ export async function verifyTurnstile(token: string | undefined, ip: string) {
 export function errorResponse(e: unknown) {
   if (e instanceof AuditError) return Response.json({ error: e.message }, { status: e.status });
   console.error(e);
-  return Response.json({ error: "Something went wrong while auditing this page." }, { status: 500 });
+  // a short technical reason helps diagnose failures from the network panel; the page shows only the friendly message
+  const detail = e instanceof Error ? `${e.name}: ${e.message}`.split("\n")[0].replace(/\/[\w./-]*\//g, "").slice(0, 200) : "";
+  return Response.json({ error: "Something went wrong while auditing this page.", detail }, { status: 500 });
 }
