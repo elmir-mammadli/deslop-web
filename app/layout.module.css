@@ -1,0 +1,30 @@
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 22px;
+  padding-bottom: 18px;
+}
+
+.mark {
+  font-size: 24px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 17px; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+
+.footer {
+  margin-top: 120px;
+  padding: 28px 0 40px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-3);
+  font-size: 16px;
+}
+
+.footerRow { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 32px; }
+.footerRow p { margin: 0; }

@@ -1,0 +1,44 @@
+.how {
+  display: grid;
+  gap: 20px 56px;
+  padding-top: 64px;
+  border-top: 1px solid var(--ink);
+}
+
+@media (min-width: 900px) {
+  .how { grid-template-columns: 0.8fr 1.2fr; }
+}
+
+.howTitle { margin: 0; max-width: 14ch; font-size: clamp(30px, 3.6vw, 42px); }
+
+.howText p { margin: 0 0 16px; max-width: 60ch; color: var(--ink-2); }
+
+.groups { margin-top: 48px; }
+
+.groupList { margin: 0; border-top: 1px solid var(--rule); }
+
+.groupItem {
+  display: grid;
+  gap: 2px 56px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+@media (min-width: 900px) {
+  .groupItem { grid-template-columns: 0.8fr 1.2fr; }
+}
+
+.groupItem dt { font-weight: 600; }
+.groupItem dd { margin: 0; max-width: 60ch; color: var(--ink-2); }
+
+.origin {
+  display: grid;
+  gap: 20px 56px;
+  margin-top: 96px;
+}
+
+@media (min-width: 900px) {
+  .origin { grid-template-columns: 0.8fr 1.2fr; }
+}
+
+.originText { margin: 0; max-width: 60ch; color: var(--ink-2); }

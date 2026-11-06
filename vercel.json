@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm build",
+  "functions": {
+    "app/api/audit/route.ts": { "memory": 2048, "maxDuration": 60 }
+  }
+}
