@@ -4,10 +4,11 @@ import Script from "next/script";
 import { useRef, useState } from "react";
 import { TELL_BY_ID } from "@/lib/tells";
 import type { Crop, PagePayload, SavedReport } from "@/lib/types";
+import { PageSketch, ProgressRule, SiteSketch } from "./PageSketch";
 import Report from "./Report";
 import s from "./auditor.module.css";
 
-type Row = { url: string; status: "waiting" | "running" | "done" | "failed"; note?: string };
+type Row = { url: string; status: "waiting" | "running" | "done" | "failed"; note?: string; clean?: boolean };
 type Phase = "idle" | "discovering" | "running" | "done";
 
 const CONCURRENCY = 2;
@@ -91,7 +92,7 @@ export default function Auditor({ children, canShare }: { children?: React.React
           results.push(p);
           setPayloads([...results]);
           const n = Object.values(p.result.counts).reduce((a, b) => a + b, 0);
-          update(url, { status: "done", note: n ? `${n} finding${n === 1 ? "" : "s"}` : "nothing found" });
+          update(url, { status: "done", clean: !n, note: n ? `${n} finding${n === 1 ? "" : "s"}` : "nothing found" });
         } catch (err) {
           if (ctrl.signal.aborted) return;
           update(url, { status: "failed", note: (err as Error).message });
@@ -139,10 +140,17 @@ export default function Auditor({ children, canShare }: { children?: React.React
             : `${done} of ${rows.length} pages done. Each page opens in a real browser at desktop width, scrolls to the end, and is read element by element.`}
         </p>
         {note && <p className={s.progressNote}>{note}</p>}
+        {phase === "discovering" && (
+          <div className={s.discover}>
+            <SiteSketch />
+          </div>
+        )}
+        {phase === "running" && <ProgressRule done={done} total={rows.length} />}
         {rows.length > 0 && (
           <ol className={s.rows}>
             {rows.map((r) => (
               <li key={r.url} className={s.row} data-status={r.status}>
+                <PageSketch status={r.status} clean={r.clean} />
                 <span className={s.rowPath}>{pathOf(r.url)}</span>
                 <span className={s.rowStatus}>
                   {r.status === "waiting" && "Waiting"}
