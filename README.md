@@ -27,7 +27,7 @@ Opens on http://localhost:3300. Local Chrome is found automatically; set `CHROME
 1. Import the repository in Vercel. The framework, install and build commands come from `vercel.json`.
 2. Environment variables:
    - `DESLOP_SECRET`: a long random string (`openssl rand -hex 32`). Required in production.
-   - `BLOB_READ_WRITE_TOKEN`: create a Blob store under Storage and connect it to the project; Vercel adds the token. Without it the share button is hidden.
+   - Share links: create a private Blob store under Storage and connect it to the project. Vercel adds `BLOB_READ_WRITE_TOKEN` (or `BLOB_STORE_ID`) itself. Without it the share button is hidden.
    - Optional: `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` to put Cloudflare Turnstile on the form.
 3. Add the domain `deslop.elmir.dev` under Settings → Domains, then add the record Vercel shows at your DNS host: a CNAME from `deslop` to `cname.vercel-dns.com`.
 
